@@ -25,6 +25,8 @@ const initialState = {
   secondsRemaining: null,
 };
 
+const categories = ["react", "javascript", "nodejs"];
+
 function reducer(state, action) {
   switch (action.type) {
     case "dataReceived":
@@ -104,14 +106,17 @@ function App() {
   const numQuestions = questions.length;
   const maxPoints = questions.reduce((acc, curr) => acc + curr.points, 0);
 
-  useEffect(function () {
-    if (!category) return;
+  useEffect(
+    function () {
+      if (!category) return;
 
-    fetch(`http://localhost:8000/${category}`)
-      .then((res) => res.json())
-      .then((data) => dispatch({ type: "dataReceived", payload: data }))
-      .catch((err) => dispatch({ type: "dataFailed" }));
-  }, []);
+      fetch(`http://localhost:8000/${category}`)
+        .then((res) => res.json())
+        .then((data) => dispatch({ type: "dataReceived", payload: data }))
+        .catch((err) => dispatch({ type: "dataFailed" }));
+    },
+    [category]
+  );
 
   return (
     <>
@@ -123,7 +128,9 @@ function App() {
         <Header />
 
         <Main>
-          {status === "selecting" && <CategorySelect dispatch={dispatch} />}
+          {status === "selecting" && (
+            <CategorySelect categories={categories} dispatch={dispatch} />
+          )}
           {status === "loading" && <Loader />}
           {status === "error" && <ErrorScreen />}
           {status === "ready" && (
@@ -139,7 +146,9 @@ function App() {
                 index={index}
                 numQuestions={numQuestions}
                 maxPoints={maxPoints}
+                categories={questions[index]}
               />
+
               <Footer>
                 <Timer
                   secondsRemaining={secondsRemaining}

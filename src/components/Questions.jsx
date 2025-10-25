@@ -6,7 +6,10 @@ function Questions({
   index,
   numQuestions,
   maxPoints,
+  categories,
 }) {
+  if (!categories) return null;
+  if (!numQuestions || !Number.isFinite(index)) return null;
   const hasAnswered = answer !== null;
   return (
     <>
@@ -37,18 +40,18 @@ function Questions({
       </div>
 
       <h2 className="text-3xl font-bold text-slate-100 mb-10 leading-relaxed">
-        {question.question}
+        {categories.question}
       </h2>
 
       <div className="flex flex-col space-y-4 max-w-md mx-auto w-full">
-        {question.options.map((opt, index) => (
+        {categories.options.map((opt, index) => (
           <button
             onClick={() => dispatch({ type: "newAnswer", payload: index })}
             key={opt}
             disabled={hasAnswered}
             className={`${answer === index ? "scale-95" : ""} ${
               hasAnswered
-                ? index === question.correctOption
+                ? index === categories.correctOption
                   ? "bg-green-500/20 border-green-500 text-green-300 shadow-lg shadow-green-500/20"
                   : "bg-red-500/20 border-red-500 text-red-300 shadow-lg shadow-red-500/20"
                 : ""

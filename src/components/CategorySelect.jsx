@@ -1,6 +1,4 @@
-function CategorySelect({ dispatch }) {
-  const categories = ["react", "javascript", "nodejs"];
-
+function CategorySelect({ dispatch, categories }) {
   return (
     <div className="text-center text-white space-y-6">
       <h2 className="text-3xl font-bold">Choose a Quiz Category</h2>
