@@ -1,8 +1,6 @@
-import { useQuiz } from "../contexts/QuizContext";
 import Button from "./Button";
 
-function FinishScreen() {
-  const { maxPoints, points, highscore, dispatch } = useQuiz();
+function FinishScreen({ maxPoints, points, highscore, dispatch }) {
   return (
     <div className="text-center flex flex-col gap-5 text-white mt-10">
       <div className="inline-block bg-linear-to-r from-cyan-500/20 via-blue-600/20 to-purple-700/20 border border-cyan-500/40 backdrop-blur-md px-8 py-6 rounded-2xl shadow-[0_0_20px_rgba(6,182,212,0.2)]">

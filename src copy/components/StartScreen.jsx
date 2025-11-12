@@ -1,8 +1,6 @@
-import { useQuiz } from "../contexts/QuizContext";
 import Button from "./Button";
 
-function StartScreen() {
-  const { numQuestions, dispatch } = useQuiz();
+function StartScreen({ numQuestions, dispatch }) {
   function handleStartGame() {
     dispatch({ type: "gameStart" });
   }

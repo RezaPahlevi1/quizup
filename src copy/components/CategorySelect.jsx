@@ -1,7 +1,4 @@
-import { useQuiz } from "../contexts/QuizContext";
-
-function CategorySelect() {
-  const { dispatch, categories } = useQuiz();
+function CategorySelect({ dispatch, categories }) {
   return (
     <div className="text-center text-white space-y-6">
       <h2 className="text-3xl font-bold">Choose a Quiz Category</h2>
